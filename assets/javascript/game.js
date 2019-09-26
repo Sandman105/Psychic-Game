@@ -13,16 +13,57 @@ var losses = 0;
 //Need a Guesses Left variable
 var guesses = 9;
 
+//storage container for keys being pushed
+
+var userGuess = [];
+
+//storage for the computer random letter
+var computerGuess = deepBlueGuess();
+
 
 var winsText = document.getElementById("wins");
 var lossesText = document.getElementById("loss");
 var guessesText = document.getElementById("guessLeft");
+var userGuessText =document.getElementById("guessTotal");
+console.log(winsText);
 
+//So onkeyup is like a loop
 document.onkeyup = function (event) {
     var userChoice = event.key;
 
-    var deepBlueGuess = deepBlue[Math.floor(Math.random() * deepBlue.length)];
+if (userChoice === computerGuess) {
+    wins++;
+    computerGuess = deepBlueGuess();
+    guesses = 9;
+    userGuess = [];
 }
+
+else { 
+    guesses--;
+    userGuess.push(userChoice);
+}
+
+if (guesses <= 0) {
+    losses ++;
+    computerGuess = deepBlueGuess();
+    guesses = 9;
+    userGuess = [];
+}
+console.log(userChoice);
+console.log(computerGuess);
+
+
+
+
+winsText.textContent = "Wins: " + wins;
+lossesText.textContent = "Loss: " + losses;
+guessesText.textContent = "Guesses: " + guesses;
+userGuessText.textContent = "Your Guesses So Far: " + userGuess;
+console.log(wins);
+    
+}
+
+
 
 // FUNCTIONS
 // ==============================================================================
@@ -30,13 +71,14 @@ document.onkeyup = function (event) {
 //Random test - this function works, can see random letter displayed in console. Just no display
 // on page yet
 
-//function deepBlueGuess(deepBlue) {
-    //return deepBlue[Math.floor(Math.random() * deepBlue.length)];
+function deepBlueGuess() {
+    return deepBlue[Math.floor(Math.random() * deepBlue.length)];
 
-//}
-//console.log(deepBlueGuess(deepBlue));
+}
+console.log(deepBlueGuess(deepBlue));
 
 
+//Random Notes
 
 //Need a guesses so far variable, which shows the letter you have typed
 //
@@ -49,11 +91,6 @@ document.onkeyup = function (event) {
 
 //when you guess right, your Wins go up by 1
 
-
-
-
-
-
 //Need a function to display # of times user has guessed correctly
 //Need a function to display the # Guesses left, so we can set it like it is in the video, 
 //so 9 guesses is the top limit, then each guess is -1, so this might be a for loop
@@ -63,5 +100,4 @@ document.onkeyup = function (event) {
 //I could create an alert if a user picks a key other than a letter
 
 
-// MAIN PROCESS
-// ==============================================================================
+

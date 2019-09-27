@@ -60,6 +60,10 @@ lossesText.textContent = "Loss: " + losses;
 guessesText.textContent = "Guesses: " + guesses;
 userGuessText.textContent = "Your Guesses So Far: " + userGuess;
 console.log(wins);
+console.log(losses);
+console.log(guesses);
+console.log(userGuess);
+
     
 }
 
